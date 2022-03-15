@@ -102,6 +102,9 @@ export default class HelloWorld {
 		// apply the animation to our cube
 		const flipAnim = await flipAnimData.bind({ target: this.cube });
 
+
+
+
 		// Set up cursor interaction. We add the input behavior ButtonBehavior to the cube.
 		// Button behaviors have two pairs of events: hover start/stop, and click start/stop.
 		const buttonBehavior = this.cube.setBehavior(MRE.ButtonBehavior);
@@ -126,6 +129,7 @@ export default class HelloWorld {
 		// When clicked, do a 360 sideways.
 		buttonBehavior.onClick(_ => {
 			flipAnim.play();
+
 		});
 	}
 
