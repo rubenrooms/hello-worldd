@@ -19,7 +19,7 @@ module.exports = {
 		"tsconfigRootDir": __dirname,
 		"ecmaVersion": 2018,
 		"sourceType": "module",
-		"project": "./tsconfig.json"
+		"project": "tsconfig.json"
 	},
 	"plugins": [
 		"@typescript-eslint"
@@ -78,7 +78,6 @@ module.exports = {
 				}
 			}
 		],
-		"@typescript-eslint/camelcase": ["warn", {"allow": ["^_[a-z][A-Za-z0-9]*$"]}],
 		"@typescript-eslint/explicit-function-return-type": "off",
 		"@typescript-eslint/no-empty-function": "off",
 		"@typescript-eslint/no-explicit-any": "off",
@@ -90,4 +89,4 @@ module.exports = {
 		],
 		"@typescript-eslint/unbound-method": "error"
 	}
-};
+}

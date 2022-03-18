@@ -32,7 +32,7 @@ export default class HelloWorld {
 					app: { position: { x: 0, y: 0.5, z: 0 } }
 				},
 				text: {
-					contents: "Ruben Rooms",
+					contents: "click generator",
 					anchor: MRE.TextAnchorLocation.MiddleCenter,
 					color: { r: 30 / 255, g: 206 / 255, b: 213 / 255 },
 					height: 0.3
@@ -99,10 +99,12 @@ export default class HelloWorld {
 				easing: MRE.AnimationEaseCurves.Linear
 			}]}
 		);
+
 		// apply the animation to our cube
 		const flipAnim = await flipAnimData.bind({ target: this.cube });
 
-
+		//counter
+		let count =0;
 
 
 		// Set up cursor interaction. We add the input behavior ButtonBehavior to the cube.
@@ -129,7 +131,8 @@ export default class HelloWorld {
 		// When clicked, do a 360 sideways.
 		buttonBehavior.onClick(_ => {
 			flipAnim.play();
-
+			count++;
+			console.log(count);
 		});
 	}
 
