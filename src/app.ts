@@ -4,6 +4,7 @@
  */
 
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
+import fetch from 'cross-fetch';
 
 /**
  * The main class of this app. All the logic goes here.
@@ -90,21 +91,23 @@ export default class HelloWorld {
 		const flipAnimData = this.assets.createAnimationData(
 			// the animation name
 			"DoAFlip",
-			{ tracks: [{
-				// applies to the rotation of an unknown actor we'll refer to as "target"
-				target: MRE.ActorPath("target").transform.local.rotation,
-				// do a spin around the X axis over the course of one second
-				keyframes: this.generateSpinKeyframes(1.0, MRE.Vector3.Right()),
-				// and do it smoothly
-				easing: MRE.AnimationEaseCurves.Linear
-			}]}
+			{
+				tracks: [{
+					// applies to the rotation of an unknown actor we'll refer to as "target"
+					target: MRE.ActorPath("target").transform.local.rotation,
+					// do a spin around the X axis over the course of one second
+					keyframes: this.generateSpinKeyframes(1.0, MRE.Vector3.Right()),
+					// and do it smoothly
+					easing: MRE.AnimationEaseCurves.Linear
+				}]
+			}
 		);
 
 		// apply the animation to our cube
 		const flipAnim = await flipAnimData.bind({ target: this.cube });
 
 		//counter
-		let count =0;
+		let count = 0;
 
 
 		// Set up cursor interaction. We add the input behavior ButtonBehavior to the cube.
@@ -133,7 +136,31 @@ export default class HelloWorld {
 			flipAnim.play();
 			count++;
 			console.log(count);
+			SendCounter();
 		});
+
+		type CounterResponse = {
+			counter: string;
+		}
+
+		async function SendCounter() {
+			try {
+				const res = await fetch('http://localhost:3000/api/v1/counter', {
+					method: "POST",
+					body: JSON.stringify({}),
+					headers: {
+						"Content-Type": "application/json"
+					},
+				});
+
+				if (res.status >= 400) {
+					throw new Error("Bad response from server");
+				}
+
+			} catch (err) {
+				console.error(err);
+			}
+		}
 	}
 
 	/**
