@@ -135,7 +135,6 @@ export default class HelloWorld {
 		buttonBehavior.onClick(_ => {
 			flipAnim.play();
 			count++;
-			console.log(count);
 			SendCounter();
 		});
 
@@ -147,18 +146,23 @@ export default class HelloWorld {
 			try {
 				const res = await fetch('http://localhost:3000/api/v1/counter', {
 					method: "POST",
-					body: JSON.stringify({}),
+					body: JSON.stringify({
+						counter: count
+					}),
 					headers: {
 						"Content-Type": "application/json"
 					},
 				});
-
-				if (res.status >= 400) {
-					throw new Error("Bad response from server");
+				console.log(count);
+				if (!res.ok) {
+					return new Error(`Error! status: ${res.status}`);
 				}
 
+				const result = (await res.json()) as CounterResponse;
+				return result;
+				
 			} catch (err) {
-				console.error(err);
+				return err;
 			}
 		}
 	}

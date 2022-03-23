@@ -25,6 +25,7 @@ module.exports = {
 		"@typescript-eslint"
 	],
 	"rules": {
+		"@typescript-eslint/no-unsafe-assignment": "error",
 		"block-spacing": ["warn", "always"],
 		"brace-style": ["warn", "1tbs", {"allowSingleLine": true}],
 		"curly": ["warn", "all"],
