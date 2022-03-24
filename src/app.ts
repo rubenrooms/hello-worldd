@@ -151,7 +151,7 @@ export default class HelloWorld {
 				await fetch('http://localhost:3000/api/v1/counter', {
 					method: "POST",
 					body: JSON.stringify({
-						"counter": 1
+						"counter": count
 					}),
 					headers: {
 						"Content-Type": "application/json; charset=UTF-8",
