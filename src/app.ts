@@ -131,36 +131,43 @@ export default class HelloWorld {
 			});
 		});
 
+		let data = {
+			clicks: count
+		} 
+
 		// When clicked, do a 360 sideways.
 		buttonBehavior.onClick(_ => {
-			flipAnim.play();
 			count++;
+			flipAnim.play();
 			SendCounter();
 		});
 
-		type CounterResponse = {
-			counter: string;
-		}
+		/*type CounterResponse = {
+			clicks: string;
+		}*/
 
 		async function SendCounter() {
 			try {
-				const res = await fetch('http://localhost:3000/api/v1/counter', {
+				await fetch('http://localhost:3000/api/v1/counter', {
 					method: "POST",
 					body: JSON.stringify({
-						counter: count
+						"counter": 1
 					}),
 					headers: {
-						"Content-Type": "application/json"
+						"Content-Type": "application/json; charset=UTF-8",
+						'Accept': 'application/json, text/plain, */*'
 					},
-				});
+				})
+				.then((res) => res.json())
+				.then((json) => console.log(json));
 				console.log(count);
-				if (!res.ok) {
+				/*if (!res.ok) {
 					return new Error(`Error! status: ${res.status}`);
 				}
 
 				const result = (await res.json()) as CounterResponse;
-				return result;
-				
+				console.log(result);
+				return result;*/
 			} catch (err) {
 				return err;
 			}
