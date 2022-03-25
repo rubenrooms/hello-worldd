@@ -5,6 +5,7 @@
 
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
 import fetch from 'cross-fetch';
+import { json } from 'stream/consumers';
 
 /**
  * The main class of this app. All the logic goes here.
@@ -142,13 +143,9 @@ export default class HelloWorld {
 			SendCounter();
 		});
 
-		/*type CounterResponse = {
-			clicks: string;
-		}*/
-
 		async function SendCounter() {
 			try {
-				await fetch('http://localhost:3000/api/v1/counter', {
+				await fetch('http://localhost:3000/', {
 					method: "POST",
 					body: JSON.stringify({
 						"counter": count
@@ -162,6 +159,8 @@ export default class HelloWorld {
 				.then((res) => res.json())
 				.then((json) => console.log(json));
 				console.log(count);
+	
+				return json;
 				/*if (!res.ok) {
 					return new Error(`Error! status: ${res.status}`);
 				}
