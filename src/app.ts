@@ -155,7 +155,8 @@ export default class HelloWorld {
 					}),
 					headers: {
 						"Content-Type": "application/json; charset=UTF-8",
-						'Accept': 'application/json, text/plain, */*'
+						"Accept": 'application/json, text/plain, */*',
+						"Access-Control-Allow-Origin": "*"
 					},
 				})
 				.then((res) => res.json())
